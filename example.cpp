@@ -14,11 +14,14 @@ int main()
 	std::string data;
 	
 	// RCON Example.
+	#ifdef RCON_EXAMPLE
 	RCON rcon(EXAMPLE_IP, EXAMPLE_PORT, EXAMPLE_PASSWORD);
 	rcon.Send(EXAMPLE_COMMAND);
 	data.assign(rcon.Recv());
 	std::cout << "RCON response: " << data << "\n";
-
+	#endif
+	
+	#ifdef QUERY_EXAMPLE
 	// Query example.
 	Query query(EXAMPLE_IP, EXAMPLE_PORT);
 	std::string pingdata;
@@ -26,5 +29,6 @@ int main()
 	tostring << ((rand() % 8999) + 1000);
 	data.assign(query.Ping(tostring.str()));
 	std::cout << "Query response: " << data << "\n";
+	#endif
 	return 1;
 }
