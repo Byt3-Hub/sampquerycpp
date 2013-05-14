@@ -70,6 +70,7 @@ std::string RCON::Recv(int timeout)
 			}
 			packet.append(cbuffer, 13, strlen(cbuffer));
 			starttime = GetTickCount();
+			memset(cbuffer, '\0', 512);
 		}
 	}
 	return packet;
