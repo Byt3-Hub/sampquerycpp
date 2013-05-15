@@ -9,7 +9,7 @@ How to use it.
 It's quite simple actually, I've broken it up into a couple classes and here's the gist of it...
 
 Sending an "echo" RCON command to a server on localhost (127.0.0.1), port 7777 with password changeme, then recieving the response from the server and printing it into the console:
-```
+```cpp
 RCON rcon("127.0.0.1", 7777, "changeme");
 rcon->Send("echo Hello there!");
 std::string recvval = rcon->Recv();
@@ -17,7 +17,7 @@ std::cout << "RCON Response: " << recvval << "\n";
 ```
 
 Sending a ping request to a server on localhost (127.0.0.1), port 7777 then recieving the response and printing it into the console:
-```
+```cpp
 Query query("127.0.0.1", 7777);
 std::string recvval = query->Ping("5256");
 std::cout << "Ping Response: " << recvval << "\n";
@@ -29,7 +29,7 @@ The functions.
 ===========
 
 RCON:
-```
+```cpp
 int Send(std::string command); // Send an RCON command to the IP/port used during construction.
 std::string Recv(); // Recieve responses from the IP/port used during construction.
 
@@ -38,7 +38,7 @@ RCON(std::string ip, const short port, std::string password); // Construct the R
 ```
 
 Query:
-```
+```cpp
 std::string Information(); // Get information of the server on the IP/port used during construction.
 std::string Rules(); // Get the rules of the server on the IP/port used during construction.
 std::string ClientList(); // Get the client list of the server on the IP/port used during construction.
