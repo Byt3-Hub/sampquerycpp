@@ -168,6 +168,8 @@ RCON::RCON(std::string ip, const short port, std::string password)
 	sip.assign(ip);
 	spass.assign(password);
 	sport = port;
+	
+	Send("echo RCON admin connected to the server.");
 }
 
 RCON::~RCON()
