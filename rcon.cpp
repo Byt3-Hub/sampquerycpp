@@ -1,7 +1,24 @@
+/*
+	C++ Implementation of the SA-MP RCON/Query mechanism.
+	
+    Copyright (C) 2013 Cody Cunningham
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #include "rcon.h"
 
 #ifndef WIN32
-#ifndef UNXTICKCOUNT
 unsigned long long int RCON::GetTickCount()
 {
 	std::ifstream uptime("/proc/uptime");
@@ -29,10 +46,6 @@ unsigned long long int RCON::GetTickCount()
 		return ((tp.time * 1000) + tp.millitm);
 	}
 }
-#define UNXTICKCOUNT
-#else
-extern unsigned long long int GetTickCount();
-#endif
 #endif
 
 int RCON::Send(std::string command)
