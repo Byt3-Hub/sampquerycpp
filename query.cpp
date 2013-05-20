@@ -107,8 +107,24 @@ std::string Query::Recv(int timeout)
 		if(recvbytes > 11)
 		{
 			if(packet.length() > 0) packet.append("\n");
-			packet.append(cbuffer, 11, strlen(cbuffer));
+
+			int state = 0;
+			for(int i = 11; i < recvbytes; i++)
+			{
+				if(!(cbuffer[i] >= 32 && cbuffer[i] <= 126) && state == 0)
+				{
+					state = 1;
+					packet.append("\n");
+				}
+				else if((cbuffer[i] >= 32 && cbuffer[i] <= 126))
+				{
+					state = 0;
+					packet += cbuffer[i];
+				}
+			}
+
 			starttime = GetTickCount();
+			memset(cbuffer, '\0', 512);
 		}
 	}
 	return packet;

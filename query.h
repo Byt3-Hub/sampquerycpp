@@ -52,7 +52,7 @@ public:
 	std::string Ping(std::string data, int timeout = QUERY_DEFAULT_TIMEOUT);
 
 	// Shouldn't really be required, but here if you need it.
-	int Send(const char opcode, std::string data = NULL);
+	int Send(const char opcode, std::string data = " ");
 	std::string Recv(int timeout = QUERY_DEFAULT_TIMEOUT);
 
 	Query(std::string ip, const short port);

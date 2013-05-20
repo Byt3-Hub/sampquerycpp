@@ -77,11 +77,21 @@ std::string RCON::Recv(int timeout)
 		if(recvbytes > 13)
 		{
 			if(packet.length() > 0) packet.append("\n");
-			for(int i = 0; i < 13; i++)
+
+			int state = 0;
+			for(int i = 13; i < recvbytes; i++)
 			{
-				if(cbuffer[i] == 0) cbuffer[i]++;
+				if(!(cbuffer[i] >= 32 && cbuffer[i] <= 126) && state == 0)
+				{
+					state = 1;
+					packet.append("\n");
+				}
+				else if((cbuffer[i] >= 32 && cbuffer[i] <= 126))
+				{
+					state = 0;
+					packet += cbuffer[i];
+				}
 			}
-			packet.append(cbuffer, 13, strlen(cbuffer));
 			starttime = GetTickCount();
 			memset(cbuffer, '\0', 512);
 		}
